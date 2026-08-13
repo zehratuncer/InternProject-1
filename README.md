@@ -1,291 +1,363 @@
-# 🏢 Enterprise Dealer Document Management Portal
+# 🏢 Kurumsal Bayi Doküman Yönetim Portalı
 
-> **Internship Project — Tofaş IT**
+> **Staj Projesi — Tofaş IT**
 
-A web-based enterprise document management portal designed to provide authorized dealer users with centralized access to documents, announcements, training materials, and marketing content.
+Yetkili bayi kullanıcılarının kendilerine tanımlanan dokümanlara, duyurulara, eğitim materyallerine ve diğer kurumsal içeriklere merkezi ve kontrollü bir şekilde erişebilmesini sağlamak amacıyla geliştirilen web tabanlı **kurumsal doküman yönetim portalı**.
 
-The platform includes role-based access control, brand-based content targeting, document lifecycle management, file handling, and access auditing.
-
----
-
-## ⚠️ Confidentiality Notice
-
-This project was developed during my software engineering internship at Tofaş.
-
-Due to corporate confidentiality, intellectual property, and internal security requirements, the original source code, production data, internal URLs, credentials, and company-specific configuration are **not publicly available**.
-
-This repository is a **sanitized portfolio presentation** of the project and contains only non-sensitive project information and selected interface screenshots.
-
-No proprietary source code or confidential corporate data is included.
+Uygulama; **Role-Based Authorization**, **JWT Authentication**, marka bazlı içerik yetkilendirme, doküman yaşam döngüsü yönetimi, dosya yönetimi ve erişim kayıtlarının tutulması gibi kurumsal uygulamalarda önemli olan işlevleri kapsamaktadır.
 
 ---
 
-## 📌 Project Overview
+## ⚠️ Gizlilik ve Kaynak Kod Bilgilendirmesi
 
-The project addresses the need for a centralized platform through which authorized dealer users can access the documents and digital materials relevant to the brands they represent.
+Bu proje, Tofaş bünyesindeki yazılım geliştirme stajım kapsamında geliştirilmiştir.
 
-The system was designed around three primary user roles:
+Kurumsal gizlilik, fikri mülkiyet ve şirket içi güvenlik gereklilikleri nedeniyle projenin **kaynak kodu, gerçek kurumsal verileri, şirket içi URL'leri, kimlik bilgileri ve yapılandırma dosyaları** kamuya açık olarak paylaşılmamaktadır.
 
-* **Administrator** — manages users, dealers, brands, categories, documents, and access records.
-* **Content Manager** — creates, manages, publishes, and archives content.
-* **Dealer User** — accesses documents and materials authorized for their dealer and associated brands.
+Bu repository, projenin portföy amacıyla hazırlanmış **sanitize edilmiş (hassas bilgilerden arındırılmış) bir sunumudur.**
 
-The main workflow can be summarized as:
+Repository içerisinde:
+
+* Kaynak kodu
+* Gerçek kullanıcı verileri
+* Kurumsal dokümanlar
+* Şirket içi bağlantılar
+* Kimlik bilgileri veya şifreler
+* Hassas sistem yapılandırmaları
+
+bulunmamaktadır.
+
+---
+
+# 📌 Proje Hakkında
+
+Projenin temel amacı, yetkili bayi kullanıcılarının kendileri için erişilebilir olan kurumsal dokümanlara tek bir platform üzerinden ulaşabilmesini sağlamaktır.
+
+Sistem üç temel kullanıcı rolü üzerinden tasarlanmıştır:
+
+### 👤 Administrator
+
+Sistemin genel yönetiminden sorumludur.
+
+* Kullanıcı yönetimi
+* Bayi yönetimi
+* Marka yönetimi
+* Kategori yönetimi
+* Doküman yönetimi
+* Erişim kayıtlarının incelenmesi
+
+gibi işlemleri gerçekleştirebilir.
+
+### 📝 Content Manager
+
+Kurumsal içeriklerin yönetiminden sorumludur.
+
+* Doküman oluşturma
+* Doküman yükleme
+* Doküman güncelleme
+* İçerik yayınlama
+* Arşivleme
+
+işlemlerini gerçekleştirebilir.
+
+### 🏢 Dealer User
+
+Bayi kullanıcılarının uygulamayı kullandığı roldür.
+
+* Kendisine erişim yetkisi verilen içerikleri görüntüleme
+* Dokümanları inceleme
+* Yetkili olduğu dokümanları indirme
+* İlgili duyuru ve bildirimleri takip etme
+
+işlemlerini gerçekleştirebilir.
+
+---
+
+# 🎯 Temel İş Akışı
+
+Uygulamanın temel çalışma mantığı aşağıdaki şekilde özetlenebilir:
 
 ```text
-Authentication
-      ↓
-Content Management
-      ↓
-Brand-Based Targeting
-      ↓
-Authorized Dealer Access
-      ↓
-Access Tracking & Auditing
+Kullanıcı Kimlik Doğrulama
+          ↓
+     Kullanıcı Rolü
+          ↓
+  Yetkilendirme Kontrolü
+          ↓
+Bayi - Marka İlişkisi
+          ↓
+Doküman - Marka İlişkisi
+          ↓
+Yetkili İçeriklerin Gösterilmesi
+          ↓
+   Erişim Kaydının Tutulması
 ```
+
+Bu yapı sayesinde kullanıcının yalnızca sisteme giriş yapmış olması yeterli değildir. Kullanıcının ilgili kaynağa erişim yetkisinin de bulunması gerekir.
 
 ---
 
-# ✨ Key Features
+# ✨ Temel Özellikler
 
-### 🔐 Authentication & Authorization
+## 🔐 Kimlik Doğrulama ve Yetkilendirme
 
-* JWT-based authentication
-* Role-based authorization
-* Protected frontend routes
-* Backend-side authorization enforcement
-* Active/inactive user management
+* JWT tabanlı Authentication
+* Role-Based Authorization
+* Yetkili kullanıcıların sisteme giriş yapabilmesi
+* Kullanıcı rolüne göre farklı arayüz ve işlemlerin sunulması
+* Backend tarafında yetkilendirme kontrolleri
+* Aktif / pasif kullanıcı yönetimi
 
-### 📄 Document Management
+---
 
-* Document upload and metadata management
-* Document categorization
-* Brand-based content targeting
-* Document status management
-* Archive / soft-delete workflow
-* Controlled document download
+## 📄 Doküman Yönetimi
 
-### 🏷️ Brand-Based Access Control
+* Doküman yükleme
+* Doküman metadata yönetimi
+* Kategori bazlı doküman yönetimi
+* Marka bazlı içerik hedefleme
+* Doküman durum yönetimi
+* Arşivleme
+* Soft Delete
+* Yetkili dokümanların indirilmesi
 
-A dealer does not automatically have access to every document in the system.
+---
 
-Content visibility is determined by the relationship between:
+## 🏷️ Marka Bazlı İçerik Yetkilendirme
+
+Sistemde her bayi kullanıcısının bütün dokümanlara erişmesi beklenmemektedir.
+
+Bir dokümanın hangi bayiler tarafından görüntülenebileceği, bayi ile marka arasındaki ilişki ve dokümanın ilişkilendirildiği markalar üzerinden belirlenmektedir.
+
+Basitleştirilmiş yapı:
 
 ```text
-Dealer
-  ↓
-Dealer ↔ Brand
-  ↓
-Authorized Brands
-  ↓
-Material ↔ Brand
-  ↓
-Visible Documents
+Bayi
+ ↓
+DealerBrand
+ ↓
+Yetkili Markalar
+ ↓
+MaterialBrand
+ ↓
+Doküman
 ```
 
-This allows content to be distributed selectively according to the brands associated with a dealer.
+Örneğin bir bayi belirli markalarla ilişkilendirilmişse, yalnızca bu markalara yönelik olarak yayınlanan dokümanlara erişebilir.
 
-### 📊 Access Auditing
-
-The system records content access activities such as:
-
-* Document viewing
-* Document downloading
-* User activity
-* Access time
-* Related document/user information
-
-This provides an audit trail for content access and usage.
-
-### 🗂️ Administrative Management
-
-Administrators can manage:
-
-* Users
-* Dealers
-* Brands
-* Categories
-* Documents
-* Access records
+Bu yapı, içeriklerin kullanıcıya yalnızca ihtiyaç duyduğu ve yetkili olduğu kapsamda sunulmasını sağlar.
 
 ---
 
-# 🖥️ Application Preview
+## 📊 Erişim Kayıtları ve Audit
 
-## Dealer Portal
+Sistem üzerinde gerçekleştirilen belirli doküman işlemleri kayıt altına alınabilmektedir.
 
-### 🔐 Dealer Login
+Örneğin:
 
-The dealer-facing application provides a dedicated authentication experience for authorized users.
+* Doküman görüntüleme
+* Doküman indirme
+* Kullanıcı
+* Erişim zamanı
+* İlgili doküman
 
-![Dealer Login](assets/01_bayi_login.png)
+gibi bilgiler üzerinden bir **audit trail** oluşturulmaktadır.
 
----
-
-### 🏠 Dealer Dashboard
-
-After authentication, users are presented with a dashboard containing relevant information and recently added content.
-
-![Dealer Dashboard](assets/02_bayi_home.png)
+Bu yapı, kurumsal uygulamalarda önemli olan **izlenebilirlik (traceability)** ihtiyacını karşılamaya yardımcı olur.
 
 ---
 
-### 📄 Document Library
+# 🖥️ Uygulama Ekranları
 
-Dealer users can browse available documents and filter content according to their needs.
+## 🏢 Bayi Portalı
 
-Only content authorized for the user's dealer and associated brands is made available.
+### 🔐 Giriş Ekranı
 
-![Dealer Documents](assets/04_bayi_documents.png)
+Yetkili bayi kullanıcılarının sisteme kimlik doğrulama gerçekleştirerek giriş yaptığı ekran.
 
----
-
-### 🔔 Notifications
-
-The portal provides a notification interface for communicating relevant updates and announcements to users.
-
-![Dealer Notifications](assets/03_bayi_notifications.png)
+![Bayi Giriş](assets/01_bayi_login.png)
 
 ---
 
-# 🛠️ Administration Portal
+### 🏠 Bayi Ana Sayfası
 
-The project also includes a dedicated administration interface for managing the platform and monitoring content activity.
+Kullanıcı sisteme giriş yaptıktan sonra kendisi için hazırlanan ana sayfaya yönlendirilir.
 
-### 📊 Administration Dashboard
+Bu ekran üzerinden güncel içeriklere ve uygulamadaki temel işlevlere erişilebilir.
 
-The dashboard provides administrators with an overview of system activity and content-related information.
+![Bayi Ana Sayfa](assets/02_bayi_home.png)
+
+---
+
+### 📄 Dokümanlar
+
+Bayi kullanıcılarının erişim yetkileri dahilindeki dokümanları görüntüleyebildiği ana doküman yönetim ekranıdır.
+
+Dokümanlar kullanıcıya tanımlanan yetkilendirme kuralları doğrultusunda listelenmektedir.
+
+![Bayi Dokümanları](assets/04_bayi_documents.png)
+
+---
+
+### 🔔 Bildirimler
+
+Kullanıcıların kendileriyle ilişkili duyuru ve bildirimleri takip edebildiği ekran.
+
+![Bayi Bildirimleri](assets/03_bayi_notifications.png)
+
+---
+
+# 🛠️ Yönetim Paneli
+
+Uygulamada sistem yöneticileri ve içerik yöneticileri için ayrı bir yönetim arayüzü bulunmaktadır.
+
+## 📊 Yönetim Paneli
+
+Yönetim paneli üzerinden sistemdeki içerik ve kullanıcılarla ilgili genel bilgiler takip edilebilmektedir.
 
 ![Admin Dashboard](assets/09_admin_dashboard.png)
 
 ---
 
-### 📚 Document Management
+## 📚 Doküman Yönetimi
 
-Content managers and administrators can manage documents through a centralized interface.
+Yöneticiler ve içerik yöneticileri, dokümanları merkezi bir arayüz üzerinden yönetebilmektedir.
 
-Documents can be reviewed, filtered, managed, and targeted to specific brands.
+Dokümanlar filtrelenebilir, incelenebilir ve ilgili markalarla ilişkilendirilebilir.
 
-![Admin Documents](assets/10_admin_documents_list.png)
-
----
-
-### 📑 Document Details
-
-Administrators can inspect document metadata and perform management operations through the document detail interface.
-
-![Document Details](assets/11_admin_document_detail_drawer.png)
+![Admin Dokümanları](assets/10_admin_documents_list.png)
 
 ---
 
-### 📊 Document Access Reporting
+## 📑 Doküman Detayları
 
-The system provides reporting capabilities for monitoring document access and understanding how content is being used.
+Yönetici, seçilen dokümana ait metadata bilgilerini inceleyebilir ve ilgili yönetim işlemlerini gerçekleştirebilir.
 
-![Document Access Report](assets/13_admin_document_access_report.png)
-
----
-
-## 🧩 Administration & Audit
-
-The administration interface also includes dedicated management screens for users, dealers, brands, categories, login activity, and access logs.
-
-These interfaces allow administrators to maintain the system's core definitions and monitor user activity.
+![Doküman Detayları](assets/11_admin_document_detail_drawer.png)
 
 ---
 
-# 🏗️ Architecture
+## 📊 Doküman Erişim Raporu
 
-The application was structured as a **modular monolith following Clean Architecture principles**.
+Sistemdeki doküman erişimlerinin takip edilebilmesi amacıyla erişim kayıtları görüntülenebilmektedir.
 
-The backend is intentionally separated into distinct responsibilities rather than placing business logic directly inside controllers.
+Bu ekran üzerinden doküman kullanımına ilişkin audit verileri incelenebilir.
+
+![Doküman Erişim Raporu](assets/13_admin_document_access_report.png)
+
+---
+
+# 🧩 Yönetim ve Audit Ekranları
+
+Yönetim paneli içerisinde ayrıca:
+
+* Kullanıcı yönetimi
+* Bayi yönetimi
+* Marka yönetimi
+* Kategori yönetimi
+* Login activity
+* Access logs
+
+gibi sistem yönetimi ve izleme ekranları bulunmaktadır.
+
+Bu ekranlar sayesinde sistem yöneticilerinin uygulamadaki temel tanımları yönetmesi ve kullanıcı aktivitelerini takip etmesi sağlanmaktadır.
+
+---
+
+# 🏗️ Sistem Mimarisi
+
+Uygulama, **Modular Monolith (Modüler Monolit)** yaklaşımı ve **Clean Architecture** prensipleri doğrultusunda yapılandırılmıştır.
+
+Proje mikroservis mimarisinde değildir. Uygulama tek bir deploy edilebilir uygulama içerisinde, sorumlulukların birbirinden ayrıldığı modüler bir yapı kullanmaktadır.
+
+Genel mimari yaklaşım:
 
 ```text
-┌───────────────────────────────────────────┐
-│                 Angular                   │
-│                                           │
-│  Pages • Components • Services            │
-│  Route Guards • Interceptors              │
-└─────────────────────┬─────────────────────┘
-                      │
-                 HTTPS / JWT
-                      │
-                      ▼
-┌───────────────────────────────────────────┐
-│            ASP.NET Core Web API            │
-│                                           │
-│  Controllers • Application Services       │
-│  Authentication • Authorization           │
-│  Swagger / OpenAPI                        │
-└─────────────────────┬─────────────────────┘
-                      │
-                      ▼
-┌───────────────────────────────────────────┐
-│          Clean Architecture Layers        │
-│                                           │
-│  Core → Application → Infrastructure      │
-└─────────────────────┬─────────────────────┘
-                      │
-              ┌───────┴────────┐
-              ▼                ▼
-       ┌─────────────┐  ┌───────────────┐
-       │ PostgreSQL  │  │ File Storage  │
-       │             │  │               │
-       │ Metadata    │  │ Binary Files  │
-       └─────────────┘  └───────────────┘
+┌──────────────────────────────────────┐
+│             Angular                  │
+│                                      │
+│ Components • Services • Guards       │
+│ Interceptors • Models                │
+└──────────────────┬───────────────────┘
+                   │
+              HTTP / JWT
+                   │
+                   ▼
+┌──────────────────────────────────────┐
+│        ASP.NET Core Web API           │
+│                                      │
+│ Controllers • Services               │
+│ Authentication • Authorization       │
+│ Swagger / OpenAPI                    │
+└──────────────────┬───────────────────┘
+                   │
+                   ▼
+┌──────────────────────────────────────┐
+│         Clean Architecture           │
+│                                      │
+│ Core → Application → Infrastructure  │
+└──────────────────┬───────────────────┘
+                   │
+             ┌─────┴─────┐
+             ▼           ▼
+      ┌────────────┐ ┌──────────────┐
+      │ PostgreSQL │ │ File Storage │
+      │            │ │              │
+      │ Metadata   │ │ Binary Files │
+      └────────────┘ └──────────────┘
 ```
-
-The project repository used a monorepo structure with the Angular frontend and ASP.NET Core backend maintained within the same repository.
 
 ---
 
-# 🧱 Backend Architecture
+# 🧱 Backend Mimarisi
 
-The backend follows a layered Clean Architecture approach:
+Backend tarafında temel sorumluluklar farklı katmanlara ayrılmıştır.
 
 ```text
 Core
-  │
-  ├── Entities
-  ├── Enums
-  └── Domain Exceptions
+ │
+ ├── Entities
+ ├── Enums
+ └── Domain Exceptions
        │
        ▼
 Application
-  │
-  ├── Business Rules
-  ├── DTOs
-  ├── Validation
-  └── Use Cases
+ │
+ ├── Business Logic
+ ├── DTOs
+ ├── Validation
+ └── Use Cases
        │
        ▼
 Infrastructure
-  │
-  ├── EF Core
-  ├── PostgreSQL
-  ├── Repositories
-  ├── Migrations
-  └── File I/O
+ │
+ ├── Entity Framework Core
+ ├── PostgreSQL
+ ├── Repositories
+ ├── Migrations
+ └── File I/O
        │
        ▼
 API
-  │
-  ├── Controllers
-  ├── Middleware
-  ├── JWT
-  ├── Dependency Injection
-  └── Swagger / OpenAPI
+ │
+ ├── Controllers
+ ├── Middleware
+ ├── JWT
+ ├── Dependency Injection
+ └── Swagger / OpenAPI
 ```
 
-A key architectural principle was keeping controllers thin and moving business rules into the application layer. Data access and infrastructure concerns were isolated from business logic.
+Bu yaklaşımda Controller katmanının mümkün olduğunca ince tutulması ve iş kurallarının Application katmanında konumlandırılması hedeflenmiştir.
+
+Infrastructure katmanı ise veritabanı, dosya sistemi ve diğer dış bağımlılıklarla iletişimden sorumludur.
 
 ---
 
-# 🌐 Frontend Architecture
+# 🌐 Frontend Mimarisi
 
-The frontend was developed using Angular with a feature-oriented structure.
+Frontend tarafında **Angular** kullanılmış ve uygulama sorumluluklarına göre organize edilmiştir.
 
-Main areas include:
+Genel yapı:
 
 ```text
 frontend
@@ -305,39 +377,45 @@ frontend
     └── reusable components
 ```
 
-Angular route guards are used to control the user experience and restrict access to role-specific pages, while authorization is ultimately enforced by the backend API.
+Angular tarafındaki **Route Guard** yapıları kullanıcıların yetkileri dışındaki sayfalara erişmesini engellemek için kullanılmıştır.
+
+Ancak güvenlik açısından kritik yetkilendirme kontrolleri yalnızca frontend'e bırakılmamış, backend API tarafında da uygulanmıştır.
 
 ---
 
-# 🛠️ Technology Stack
+# 🛠️ Teknoloji ve Araçlar
 
-### Frontend
+## Frontend
 
 * Angular
 * TypeScript
 * HTML
 * SCSS
 
-### Backend
+## Backend
 
 * .NET 9
 * ASP.NET Core Web API
 * Entity Framework Core
 * REST API
 
-### Database
+## Database
 
 * PostgreSQL
 * Npgsql
 * Entity Framework Core Migrations
 
-### Authentication & API
+## Authentication & Authorization
 
 * JWT Authentication
 * Role-Based Authorization
-* Swagger / OpenAPI
 
-### Infrastructure & Development
+## API
+
+* Swagger
+* OpenAPI
+
+## Containerization & Development
 
 * Docker
 * Docker Compose
@@ -346,27 +424,27 @@ Angular route guards are used to control the user experience and restrict access
 
 ---
 
-# 🗄️ Data Model
+# 🗄️ Veritabanı Modeli
 
-The system uses a relational data model to represent users, dealers, brands, categories, materials, and access records.
+Uygulamanın veri modeli; kullanıcılar, bayiler, markalar, kategoriler, materyaller ve erişim kayıtları arasındaki ilişkileri temsil edecek şekilde tasarlanmıştır.
 
-A simplified relationship model is:
+Temel ilişkiler basitleştirilmiş olarak:
 
 ```text
 Users
-  │
-  ├──────────────► Dealers
-  │                    │
-  │                    ▼
-  │              DealerBrands
-  │                    │
-  │                    ▼
-  │                  Brands
-  │                    ▲
-  │                    │
-  │              MaterialBrands
-  │                    │
-  │                    ▼
+ │
+ ├──────────────► Dealers
+ │                    │
+ │                    ▼
+ │              DealerBrands
+ │                    │
+ │                    ▼
+ │                  Brands
+ │                    ▲
+ │                    │
+ │              MaterialBrands
+ │                    │
+ │                    ▼
 Categories ───────► Materials
                        │
                        ▼
@@ -376,217 +454,257 @@ Categories ───────► Materials
                      Users
 ```
 
-One of the core authorization rules is based on the intersection between the brands associated with a dealer and the brands targeted by a document.
-
-```text
-DealerBrands ∩ MaterialBrands ≠ ∅
-```
-
-This relationship determines whether a dealer user can access a particular piece of content.
+Özellikle bayi-markalar ve materyal-markalar arasındaki **many-to-many** ilişkiler, içerik yetkilendirme mekanizmasının temelini oluşturmaktadır.
 
 ---
 
-# 🔒 Security Considerations
+# 🔒 Güvenlik Yaklaşımı
 
-Security was considered at multiple layers of the application.
+Uygulamanın farklı katmanlarında güvenlik prensipleri dikkate alınmıştır.
 
-### Authentication
+### JWT Authentication
 
-Users authenticate through the backend API and receive a JWT used for subsequent authenticated requests.
+Kullanıcı kimlik doğrulamasının ardından API isteklerinde kullanılmak üzere JWT tabanlı authentication mekanizması kullanılmaktadır.
 
-### Authorization
+### Role-Based Authorization
 
-Authorization is enforced on the backend rather than relying solely on frontend restrictions.
+Kullanıcının yalnızca sisteme giriş yapmış olması erişim için yeterli değildir.
 
-### DTO Usage
+Kullanıcının sahip olduğu role göre gerçekleştirebileceği işlemler belirlenmektedir.
 
-Internal fields such as password hashes and server-side file paths are not exposed directly through API responses.
+### Backend Authorization
 
-### File Handling
+Frontend tarafındaki route kontrolleri kullanıcı deneyimini ve navigasyonu düzenlemek için kullanılırken, güvenlik açısından kritik yetkilendirme kontrolleri backend API tarafında uygulanmaktadır.
 
-Uploaded files are handled separately from database metadata. The database stores file-related metadata while the binary content is stored in configurable server-side storage.
+### DTO Kullanımı
 
-### Access Logging
+API response'larında entity'lerin doğrudan dışarıya açılması yerine **DTO (Data Transfer Object)** yapıları kullanılarak istemciye gönderilecek veri kontrol altında tutulmaktadır.
 
-Document view and download operations can be recorded to provide an audit trail.
+Bu sayede örneğin:
 
-### Soft Delete
+* Password Hash
+* Server-side File Path
+* Internal database fields
 
-Archived content is removed from normal user-facing lists without physically deleting the underlying database record.
+gibi istemci tarafından bilinmemesi gereken alanların API response'larında açığa çıkması engellenmektedir.
 
----
+### Dosya Yönetimi
 
-# 💻 My Contribution
-
-During the project, I primarily focused on **backend development** while also contributing to the overall application development process.
-
-My responsibilities included:
-
-* Developing RESTful backend APIs
-* Implementing business logic
-* Working with Entity Framework Core
-* Designing and configuring database relationships
-* Implementing authentication and authorization
-* Working with JWT-based authentication
-* Developing role-based permission logic
-* Implementing document upload/download workflows
-* Working with PostgreSQL
-* Implementing document access logging
-* Testing APIs through Swagger and Postman
-* Working with Docker and PostgreSQL
-* Contributing to database and application architecture decisions
-* Collaborating with the frontend development process
-
----
-
-# 🧠 Engineering Challenges
-
-## 1. Brand-Based Content Authorization
-
-One of the main challenges was designing a permission model where a dealer could access only the content associated with the brands they were authorized to represent.
-
-Instead of simply checking whether a user was authenticated, access decisions were made using the relationship between:
-
-```text
-User
-  ↓
-Dealer
-  ↓
-Dealer Brands
-  ↓
-Document Brands
-```
-
-This required authorization logic to be implemented at the application/backend level.
-
----
-
-## 2. Secure File Management
-
-Documents contain both business metadata and binary content.
-
-The application therefore separates these concerns:
+Dosyanın binary içeriği ile dokümana ait metadata birbirinden ayrılmıştır.
 
 ```text
 PostgreSQL
-    ↓
-Document Metadata
+     │
+     └── Doküman Metadata
+          ├── FileName
+          ├── StoredFileName
+          ├── Extension
+          └── MIME Type
 
 File Storage
-    ↓
-Binary Content
+     │
+     └── Binary File
 ```
 
-This avoids exposing physical server paths through API responses and allows file storage to be configured independently from the relational database.
+### Soft Delete / Arşivleme
+
+Dokümanların fiziksel olarak silinmesi yerine durumlarının değiştirilmesi ve arşivlenmesi desteklenmektedir.
+
+Bu yaklaşım, veri kaybını azaltırken geçmiş kayıtların korunmasına yardımcı olur.
 
 ---
 
-## 3. Role-Based Application Design
+# 👩🏻‍💻 Projedeki Katkım
 
-The application serves multiple types of users with significantly different responsibilities.
+Projenin geliştirilmesi sırasında ağırlıklı olarak **Backend Development** alanında görev aldım. Bununla birlikte uygulamanın genel geliştirme sürecine ve frontend tarafındaki çalışmalara da katkı sağladım.
 
-Rather than creating a single interface for everyone, the application provides role-specific experiences for:
+Başlıca sorumluluklarım:
+
+* RESTful API geliştirme
+* Backend business logic geliştirme
+* Entity Framework Core kullanımı
+* PostgreSQL ile çalışma
+* Veritabanı ilişkilerinin tasarlanması
+* JWT tabanlı Authentication mekanizmasının geliştirilmesi
+* Role-Based Authorization
+* Permission / erişim kontrol mekanizmasının geliştirilmesi
+* Doküman yükleme ve indirme süreçlerinin geliştirilmesi
+* Doküman erişim kayıtlarının oluşturulması
+* Swagger üzerinden API testleri
+* Docker ve PostgreSQL geliştirme ortamının kullanılması
+* Veritabanı ve uygulama mimarisi kararlarına katkı sağlanması
+* Frontend geliştirme süreciyle koordineli çalışma
+
+---
+
+# 🧠 Karşılaşılan Mühendislik Problemleri
+
+## 1. Marka Bazlı İçerik Yetkilendirme
+
+Projedeki önemli problemlerden biri, bir bayi kullanıcısının yalnızca yetkili olduğu markalara ait dokümanları görebilmesini sağlamaktı.
+
+Basitleştirilmiş yetkilendirme akışı:
+
+```text
+User
+ ↓
+Dealer
+ ↓
+DealerBrands
+ ↓
+Authorized Brands
+ ↓
+MaterialBrands
+ ↓
+Accessible Materials
+```
+
+Bu nedenle yalnızca kullanıcının sisteme giriş yapıp yapmadığını kontrol etmek yeterli değildi.
+
+Kullanıcının bağlı olduğu bayi, bayinin yetkili olduğu markalar ve dokümanın hedeflediği markalar birlikte değerlendirilerek erişim kararı oluşturuldu.
+
+---
+
+## 2. Dosya Yönetimi
+
+Dokümanların binary verilerinin doğrudan PostgreSQL içerisinde tutulması yerine dosya içeriği ile metadata birbirinden ayrıldı.
+
+Bu yapı:
+
+* Veritabanı boyutunun kontrol edilmesi
+* Dosya sisteminin bağımsız yönetilebilmesi
+* Dosya metadata bilgilerinin ilişkisel olarak tutulabilmesi
+* Fiziksel dosya yollarının API response'larında açığa çıkmaması
+
+gibi avantajlar sağladı.
+
+---
+
+## 3. Farklı Kullanıcı Rollerinin Yönetilmesi
+
+Sistem içerisinde farklı sorumluluklara sahip kullanıcıların bulunması nedeniyle her kullanıcı için aynı erişim modelinin kullanılması uygun değildi.
 
 ```text
 Administrator
-      │
-      ├── System Management
-      ├── User Management
-      ├── Content Management
-      └── Audit / Reporting
+ │
+ ├── User Management
+ ├── Dealer Management
+ ├── Brand Management
+ ├── Content Management
+ └── Audit / Reporting
+
 
 Content Manager
-      │
-      ├── Content Creation
-      ├── Publishing
-      └── Archiving
+ │
+ ├── Content Creation
+ ├── Publishing
+ └── Archiving
+
 
 Dealer User
-      │
-      ├── Content Discovery
-      ├── Document Viewing
-      └── Document Download
+ │
+ ├── Content Discovery
+ ├── Document Viewing
+ └── Document Download
 ```
 
----
-
-## 4. Auditability
-
-Document access is not treated as a simple file download.
-
-The system also considers **who accessed the content and what action was performed**, allowing administrators to review access activity.
-
-This makes the application more suitable for an enterprise environment where content distribution needs to be traceable.
+Bu nedenle hem frontend navigasyonu hem de backend authorization mekanizmaları kullanıcı rollerine göre yapılandırıldı.
 
 ---
 
-# 📚 What I Learned
+## 4. Auditability ve İzlenebilirlik
 
-This project was one of my first hands-on experiences with enterprise-oriented software development.
+Kurumsal bir doküman yönetim sisteminde yalnızca dokümanı sunmak yeterli değildir.
 
-Through the project, I gained practical experience in:
+Dokümana kimin eriştiğinin ve hangi işlemi gerçekleştirdiğinin takip edilebilmesi de önemlidir.
+
+Bu nedenle görüntüleme ve indirme gibi işlemlerin kayıt altına alınabileceği bir **Access Log** mekanizması oluşturuldu.
+
+---
+
+# 📚 Kazanımlarım
+
+Bu proje, kurumsal yazılım geliştirme süreçlerini uygulamalı olarak deneyimlediğim önemli çalışmalardan biri oldu.
+
+Proje boyunca özellikle aşağıdaki konularda pratik deneyim kazandım:
 
 * Clean Architecture
-* Modular monolith design
-* REST API development
+* Modular Monolith
 * ASP.NET Core
+* .NET 9
+* REST API Development
 * Entity Framework Core
 * PostgreSQL
-* Database relationship design
-* JWT authentication
-* Role-based authorization
+* Relational Database Design
+* JWT Authentication
+* Role-Based Authorization
+* Permission Management
 * Angular
 * Docker
-* API testing
-* File management
-* Access logging
-* Git-based team collaboration
-* Translating business requirements into software features
+* Docker Compose
+* File Management
+* Access Logging
+* API Testing
+* Git ile ekip çalışması
+* Kurumsal uygulama geliştirme
 
-More importantly, the project helped me understand that enterprise software development is not only about implementing features. Architecture, security, maintainability, authorization, data integrity, and auditability are equally important parts of the development process.
+Bunun yanında, kurumsal yazılım geliştirmenin yalnızca özellik geliştirmekten ibaret olmadığını; **mimari, güvenlik, yetkilendirme, veri bütünlüğü, sürdürülebilirlik ve izlenebilirliğin** de uygulamanın önemli parçaları olduğunu deneyimledim.
 
 ---
 
-# 📈 Key Takeaways
+# 🎯 Temel Çıkarımlar
 
-The project gave me practical experience in designing and developing a full-stack enterprise application from both the **business requirement** and **software engineering** perspectives.
+Bu proje sayesinde bir yazılım uygulamasını yalnızca kullanıcı arayüzü ve API'lerden oluşan bir sistem olarak değil, farklı sorumlulukların bir arada çalıştığı bir **enterprise application** olarak değerlendirmeyi öğrendim.
 
-It also helped me understand how concepts such as:
+Özellikle:
 
 ```text
 Clean Architecture
-        +
+       +
 Authentication
-        +
+       +
 Authorization
-        +
+       +
 Database Design
-        +
+       +
 File Management
-        +
+       +
 Audit Logging
+       +
+Role-Based Access Control
+       ↓
+Maintainable Enterprise Application
 ```
 
-come together to form a maintainable enterprise application.
+yapılarının bir araya gelerek sürdürülebilir ve güvenli bir kurumsal uygulama oluşturmadaki rolünü uygulamalı olarak deneyimledim.
 
 ---
 
-## 📌 Project Information
+# 📌 Proje Bilgileri
 
-|                         |                                               |
-| ----------------------- | --------------------------------------------- |
-| **Project Type**        | Enterprise Web Application                    |
-| **Development Context** | Software Engineering Internship               |
-| **Architecture**        | Modular Monolith + Clean Architecture         |
-| **Frontend**            | Angular                                       |
-| **Backend**             | ASP.NET Core / .NET 9                         |
-| **Database**            | PostgreSQL                                    |
-| **ORM**                 | Entity Framework Core                         |
-| **Authentication**      | JWT                                           |
-| **API Documentation**   | Swagger / OpenAPI                             |
-| **Containerization**    | Docker / Docker Compose                       |
-| **Source Code**         | Not publicly available due to confidentiality |
+| Özellik                | Detay                                          |
+| ---------------------- | ---------------------------------------------- |
+| **Proje Türü**         | Kurumsal Web Uygulaması                        |
+| **Geliştirme Bağlamı** | Yazılım Geliştirme Stajı                       |
+| **Mimari**             | Modular Monolith + Clean Architecture          |
+| **Frontend**           | Angular                                        |
+| **Backend**            | ASP.NET Core / .NET 9                          |
+| **Veritabanı**         | PostgreSQL                                     |
+| **ORM**                | Entity Framework Core                          |
+| **Authentication**     | JWT                                            |
+| **Authorization**      | Role-Based Authorization                       |
+| **API Dokümantasyonu** | Swagger / OpenAPI                              |
+| **Containerization**   | Docker / Docker Compose                        |
+| **Kaynak Kodu**        | Kurumsal gizlilik nedeniyle paylaşılmamaktadır |
 
 ---
 
-> **Note:** The screenshots and technical descriptions in this repository have been prepared for portfolio purposes and do not contain proprietary source code or confidential corporate data.
+> **Not:** Bu repository'deki görseller ve teknik açıklamalar portföy amacıyla hazırlanmış olup kurumsal kaynak kod, gerçek kullanıcı verileri veya gizli şirket bilgileri içermemektedir.
+
+---
+
+### 👩🏻‍💻 Geliştirildiği Bağlam
+
+**Software Engineering Internship — Tofaş IT**
+
+Bu proje, kurumsal bir yazılım geliştirme ortamında ekip çalışması içerisinde geliştirilmiştir.
